@@ -15,7 +15,7 @@ updated on your module.
 ## Installation
 
 ```bash
-composer require iqomp/locale
+composer require iqomp/validator
 ```
 
 ## Validator
