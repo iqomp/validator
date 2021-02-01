@@ -29,7 +29,7 @@ return [
     'not assoc array' => 'The value is not assoc array',
     'not in array' => 'The value is not in accepted, please use one of ({options})',
     'not indexed array' => 'The value is not indexed array',
-    'not match' => 'The value format is not match, please use `{options}` format',
+    'not match' => 'The value format is not match, please use `{regex}` format',
     'not numeric' => 'The valus is not numeric',
     'require query not present' => 'Required query is not there. Please use all this query ({options})',
     'required' => 'This field is required',

@@ -29,7 +29,7 @@ return [
     'not assoc array' => 'Data ini bukan assoc array',
     'not in array' => 'Nilai tidak ada dalam opsi, gunakan salah satu dari ({options})',
     'not indexed array' => 'Data ini bukan indexed array',
-    'not match' => 'Format tidak cocok, gunakan format `{options}`',
+    'not match' => 'Format tidak cocok, gunakan format `{regex}`',
     'not numeric' => 'Bukan numeric',
     'require query not present' => 'Query string yang dibutuhkan tidak ada, query string ini harus ada {options}',
     'required' => 'Kolom ini harus diisi',

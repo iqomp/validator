@@ -3,7 +3,7 @@
 /**
  * Validation processor
  * @package iqomp/validator
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 namespace Iqomp\Validator;
@@ -85,6 +85,9 @@ class Validator
         }
 
         $text = Locale::translate($lang_key, $params, 'validator');
+        if (!$text) {
+            $text = $lang_key;
+        }
         $result->text = $text;
 
         return $result;
