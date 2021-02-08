@@ -3,7 +3,7 @@
 /**
  * Validation processor
  * @package iqomp/validator
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 namespace Iqomp\Validator;
@@ -48,6 +48,10 @@ class Validator
         $params[$rule]   = $validation['rules'][$rule];
         $params['value'] = $value;
         $params['label'] = $field;
+
+        if (is_array($params[$rule])) {
+            $params[$rule] = implode(', ', $params[$rule]);
+        }
 
         if (isset($validation['label'])) {
             $params['label'] = $validation['label'];

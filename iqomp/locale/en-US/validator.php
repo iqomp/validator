@@ -27,7 +27,7 @@ return [
     'not an object' => 'The valus is not an object',
     'not an url' => 'URL not valid',
     'not assoc array' => 'The value is not assoc array',
-    'not in array' => 'The value is not in accepted, please use one of ({options})',
+    'not in array' => 'The value is not in acceptable list, please use one of ( {in} )',
     'not indexed array' => 'The value is not indexed array',
     'not match' => 'The value format is not match, please use `{regex}` format',
     'not numeric' => 'The valus is not numeric',

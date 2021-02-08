@@ -27,7 +27,7 @@ return [
     'not an object' => 'Data ini bukan objek',
     'not an url' => 'URL tidak valid',
     'not assoc array' => 'Data ini bukan assoc array',
-    'not in array' => 'Nilai tidak ada dalam opsi, gunakan salah satu dari ({options})',
+    'not in array' => 'Nilai tidak ada dalam opsi, gunakan salah satu dari ( {in} )',
     'not indexed array' => 'Data ini bukan indexed array',
     'not match' => 'Format tidak cocok, gunakan format `{regex}`',
     'not numeric' => 'Bukan numeric',
