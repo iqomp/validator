@@ -8,8 +8,8 @@
 
 namespace Iqomp\Validator;
 
-use Iqomp\Config\Fetcher as Config;
-use Iqomp\Locale\Locale;
+use Hyperf\Utils\ApplicationContext;
+use Hyperf\Contract\TranslatorInterface;
 
 class Validator
 {
@@ -20,10 +20,10 @@ class Validator
 
     private static function buildRules(): void
     {
-        $conf = Config::get('validator');
-        self::$rules     = $conf['validators'];
-        self::$filters   = $conf['filters'];
-        self::$trans     = $conf['errors'];
+        $conf = config('validator');
+        self::$rules   = $conf['validators'];
+        self::$filters = $conf['filters'];
+        self::$trans   = $conf['errors'];
 
         if (!isset($conf['formatter'])) {
             $conf['formatter'] = 'Iqomp\\Validator\\ErrorFormatter';
@@ -71,16 +71,20 @@ class Validator
             $params[$key] = $val;
         }
 
-        $result = (object)[
-            'field'   => ($parent ? $parent . '.' : '') . $field,
-            'code'    => $err_code,
-            'text'    => '',
-            'options' => $validation
-        ];
-
         $lang_key = self::$trans[$err_code] ?? '';
         if (!$lang_key && isset($valid[2])) {
             $lang_key = $valid[2];
+        }
+
+        $result = (object)[
+            'field'   => ($parent ? $parent . '.' : '') . $field,
+            'code'    => $err_code,
+            'text'    => $lang_key,
+            'options' => $validation
+        ];
+
+        if (!function_exists('trans')) {
+            return $result;
         }
 
         // custom translation key
@@ -88,11 +92,14 @@ class Validator
             $lang_key = $validation['message'][$rule];
         }
 
-        $text = Locale::translate($lang_key, $params, 'validator');
-        if (!$text) {
-            $text = $lang_key;
+        $translator = ApplicationContext::getContainer()->get(TranslatorInterface::class);
+        $translator->addNamespace('validator', 'validator');
+        $trans_key = vsprintf('%s::%s.%s', ['validator', $rule, $lang_key]);
+        $trans_res = trans($trans_key);
+
+        if ($trans_res != $trans_key) {
+            $result->text = $trans_res;
         }
-        $result->text = $text;
 
         return $result;
     }

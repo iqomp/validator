@@ -3,37 +3,31 @@
     "description": "Simple and easy form/object validator",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "authors": [
         {
             "name": "Iqbal Fauzi",
             "email": "iqbalfawz@gmail.com"
         }
     ],
-    "require": {
-        "iqomp/config": "^1.2",
-        "iqomp/locale": "^1.0"
-    },
+    "require": {},
     "extra": {
-        "iqomp/config": "iqomp/config/",
-        "iqomp/locale": "iqomp/locale/"
+        "hyperf": {
+            "config": "Iqomp\\Validator\\ConfigProvider"
+        }
     },
     "autoload": {
         "psr-4": {
             "Iqomp\\Validator\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Iqomp\\Tests\\": "tests/"
-        }
-    },
     "require-dev": {
-        "phpunit/phpunit": "^9.4",
         "squizlabs/php_codesniffer": "^3.5"
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit tests",
         "lint": "./vendor/bin/phpcs --standard=PSR12 src"
+    },
+    "suggest": {
+        "hyperf/translation": "Allow enum to be translated to id-ID or en-US"
     }
 }

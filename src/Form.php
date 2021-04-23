@@ -3,12 +3,10 @@
 /**
  * Form object for validator
  * @package iqomp/validator
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 namespace Iqomp\Validator;
-
-use Iqomp\Config\Fetcher;
 
 class Form
 {
@@ -62,7 +60,7 @@ class Form
         $this->result = (object)[];
         $this->form = $name;
 
-        $form = Fetcher::get('form', 'forms', $name);
+        $form = config('form.forms.' . $name);
         if (!$form) {
             $msg = 'Form named `' . $name . '` not registered';
             throw new FormNotRegisteredException($msg);

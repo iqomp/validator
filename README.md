@@ -1,21 +1,23 @@
 # iqomp/validator
 
 Simple and easy form/object validator. This module bring two usable class to
-work with validation, which is `Iqomp\Validator\Validator` which can be used to
+work with validation, which is `Iqomp\Validator\Validator` that can be used to
 validate plain object againts list of rules in array. The second class is
 `Iqomp\Validator\Form` that take nothing ( optionally user generated object to
 validate ), and take the validation rule from private config. Not only validate,
 the validator class can also apply filter to the object property to change modify
 it.
 
-The cache of all forms, validation rules, and validation filters is generated
-during `composer update`. You should call this script for everytime some config
-updated on your module.
-
 ## Installation
 
 ```bash
 composer require iqomp/validator
+```
+
+## Publishing Config
+
+```bash
+php bin/hyperf.php vendor:publish iqomp/validator
 ```
 
 ## Validator
@@ -590,60 +592,51 @@ All rules that going to be applied to the field.
 
 #### Inject Validation Config
 
-This module use [iqomp/config](https://github.com/iqomp/config) for all configs.
-Create new file named `iqomp/config/validator.php` under your module main folder.
-
-Fill the file with content as below:
+Create new `ConfigProvider` on your module, and fill the file with `__invoke` method
+that return validation configs:
 
 ```php
 <?php
 
-return [
-    // error translation key
-    'errors' => [
-        '/code/' => '/translation key',
-        '100.0' => 'the value is not accepted'
-    ],
-    'validators' => [
-        'custom' => 'MyModule\\Module\\Validator::custom'
-    ]
-];
+// ...
+    return [
+        'validator' => [
+            // error translation key
+            'errors' => [
+                '/code/' => '/translation key',
+                '100.0' => 'the value is not accepted'
+            ],
+            'validators' => [
+                'custom' => 'MyModule\\Module\\Validator::custom'
+            ]
+        ]
+    ];
+// ...
 ```
 
-Update your `composer.json` file to register the new config as below:
+Make sure to update your `composer.json` file to let hyperf identify the config file:
 
 ```json
     "extra": {
-        "iqomp/config": "iqomp/config/"
-    },
+        "hyperf": {
+            "config": "Vendor\\Module\\ConfigProvider"
+        }
+    }
 ```
-
-Make sure to call `composer update` after modifing the config.
 
 #### Create Error Translation
 
-This module use [iqomp/locale](https://github.com/iqomp/locale) for the translations.
-
-Create new file named `iqomp/locale/en-US/validator.php` under your module main
-folder. Fill the file with content as below:
+This module use [hyperf/translation](https://github.com/hyperf/translation) for
+the translations. Add new translation on folder
+`storage/languages/vendor/validator/{locale}/{rule-name}.php`.
 
 ```php
 <?php
 
 return [
-    'the value is not accepted' => 'The value is not accepted. Please use other value'
+    'the value is not accepted' => 'The value is not accepted.'
 ];
 ```
-
-Update your `composer.json` file to register the new locales as below:
-
-```json
-    "extra": {
-        "iqomp/locale": "iqomp/locale/"
-    },
-```
-
-Make sure to call `composer update` after modifing the locales.
 
 ### Custom Validation Filter
 
@@ -685,29 +678,31 @@ The method will be called exactly like custom rule validation handler called.
 
 #### Inject Validation Config
 
-Create new file named `iqomp/config/validator.php` under your module main folder.
-
-Fill the file with content as below:
+Create new `ConfigProvider` on your module, and fill the file with `__invoke` method
+that return validation configs:
 
 ```php
 <?php
-
-return [
-    'filters' => [
-        'custom' => 'MyModule\\Module\\Filter::custom'
-    ]
-];
+// ...
+    return [
+        'validator' => [
+            'filters' => [
+                'custom' => 'MyModule\\Module\\Filter::custom'
+            ]
+        ]
+    ];
+// ...
 ```
 
-Update your `composer.json` file to register the new config as below:
+Make sure to update your `composer.json` file to let hyperf identify the config file:
 
 ```json
     "extra": {
-        "iqomp/config": "iqomp/config/"
-    },
+        "hyperf": {
+            "config": "Vendor\\Module\\ConfigProvider"
+        }
+    }
 ```
-
-Make sure to call `composer update` after modifing the config.
 
 ### Custom Error Formatter
 
@@ -755,29 +750,20 @@ class MyErrorFormatter implements ErrorFormatterInterface
 
 After that, registry the handler with one of below way:
 
-#### Validator Config
+#### App Config
 
 This way will always use your handler for all request and validation.
 
-Create config named `iqomp/config/validator.php`, and fill it with content as below:
+Create config named `config/autoload/validator.php`, and fill it with content
+as below:
 
 ```php
 <?php
 
 return [
-    'formatter' => 'MyModule\Formatter\MyErrorFormatter'
+    'formatter' => 'MyModule\\Formatter\\MyErrorFormatter'
 ];
 ```
-
-Update your `composer.json` file to register the new config as below:
-
-```json
-    "extra": {
-        "iqomp/config": "iqomp/config/"
-    },
-```
-
-Make sure to call `composer update` after modifing the config.
 
 #### On The Fly
 
@@ -792,7 +778,6 @@ use Iqomp\Validator\Validator;
 
 Validator::setErrorFormatter(MyErrorFormatter::class);
 ```
-
 
 ## Form
 
@@ -817,7 +802,7 @@ if (!$result) {
 As before, you need to create list of rules for the form name to be able to use in
 in that simple way.
 
-Create new file `iqomp/config/form.php` on your module main directory with content
+Create new file `config/autoload/form.php` on your app main directory with content
 as below:
 
 ```php
@@ -839,16 +824,6 @@ return [
 ];
 
 ```
-
-Update your `composer.json` file to register the new config as below:
-
-```json
-    "extra": {
-        "iqomp/config": "iqomp/config/"
-    },
-```
-
-Make sure to call `composer update` after modifing the config.
 
 ### Method
 
@@ -932,3 +907,53 @@ Check if error exists on this form after validation
 
 Validate the `$object` againts the rules based on config. If `$object` is null,
 the value will taken from request body.
+
+## Error Code
+
+Below is table list of all errors code defined so far:
+
+| Code | Module          | Rule      | Info                              |
+| ---- | --------------- | --------- | --------------------------------- |
+| 1.0  | iqomp/validator | array     | not an array                      |
+| 1.1  | iqomp/validator | array     | not indexed array                 |
+| 1.2  | iqomp/validator | array     | not assoc array                   |
+| 2.0  | iqomp/validator | date      | not a date                        |
+| 2.1  | iqomp/validator | date      | the date too early                |
+| 2.2  | iqomp/validator | date      | the date too far                  |
+| 2.3  | iqomp/validator | date      | wrong date format                 |
+| 3.0  | iqomp/validator | email     | not an email                      |
+| 4.0  | iqomp/validator | in        | not in array                      |
+| 5.0  | iqomp/validator | ip        | not an ip                         |
+| 5.1  | iqomp/validator | ip        | not an ipv4                       |
+| 5.2  | iqomp/validator | ip        | not an ipv6                       |
+| 6.0  | iqomp/validator | length    | too short                         |
+| 6.1  | iqomp/validator | length    | too long                          |
+| 7.0  | iqomp/validator | notin     | in array                          |
+| 8.0  | iqomp/validator | numeric   | not numeric                       |
+| 8.1  | iqomp/validator | numeric   | too less                          |
+| 8.2  | iqomp/validator | numeric   | too great                         |
+| 8.3  | iqomp/validator | numeric   | decimal not match                 |
+| 9.0  | iqomp/validator | object    | not an object                     |
+| 10.0 | iqomp/validator | regex     | not match                         |
+| 11.0 | iqomp/validator | required  | required                          |
+| 11.0 | iqomp/validator | req_on    | required                          |
+| 12.0 | iqomp/validator | text      | not a text                        |
+| 12.1 | iqomp/validator | text      | not a slug                        |
+| 12.2 | iqomp/validator | text      | not an alnumdash                  |
+| 12.3 | iqomp/validator | text      | not an alpha                      |
+| 12.4 | iqomp/validator | text      | not an alnum                      |
+| 13.0 | iqomp/validator | url       | not an url                        |
+| 13.1 | iqomp/validator | url       | dont have path                    |
+| 13.2 | iqomp/validator | url       | dont have query                   |
+| 13.3 | iqomp/validator | url       | require query not present         |
+| 21.0 | iqomp/validator | empty     | is empty                          |
+| 21.1 | iqomp/validator | empty     | is not empty                      |
+| 22.0 | iqomp/enum      | enum      | options not found                 |
+| 22.1 | iqomp/enum      | enum      | options not found                 |
+| 22.2 | iqomp/enum      | enum      | options not found                 |
+| 23.1 | iqomp/validator | json      | is not valid json string          |
+| 25.0 | iqomp/validator | -         | is not in acceptable value        |
+| 25.1 | iqomp/validator | -         | is not in acceptable list values  |
+| 25.2 | iqomp/validator | -         | is not match with requested value |
+| 26.1 | iqomp/validator | equals_to | is not equal                      |
+| 28.0 | iqomp/validator | file      | is not file'                      |
