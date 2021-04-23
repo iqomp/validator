@@ -912,48 +912,51 @@ the value will taken from request body.
 
 Below is table list of all errors code defined so far:
 
-| Code | Module          | Rule      | Info                              |
-| ---- | --------------- | --------- | --------------------------------- |
-| 1.0  | iqomp/validator | array     | not an array                      |
-| 1.1  | iqomp/validator | array     | not indexed array                 |
-| 1.2  | iqomp/validator | array     | not assoc array                   |
-| 2.0  | iqomp/validator | date      | not a date                        |
-| 2.1  | iqomp/validator | date      | the date too early                |
-| 2.2  | iqomp/validator | date      | the date too far                  |
-| 2.3  | iqomp/validator | date      | wrong date format                 |
-| 3.0  | iqomp/validator | email     | not an email                      |
-| 4.0  | iqomp/validator | in        | not in array                      |
-| 5.0  | iqomp/validator | ip        | not an ip                         |
-| 5.1  | iqomp/validator | ip        | not an ipv4                       |
-| 5.2  | iqomp/validator | ip        | not an ipv6                       |
-| 6.0  | iqomp/validator | length    | too short                         |
-| 6.1  | iqomp/validator | length    | too long                          |
-| 7.0  | iqomp/validator | notin     | in array                          |
-| 8.0  | iqomp/validator | numeric   | not numeric                       |
-| 8.1  | iqomp/validator | numeric   | too less                          |
-| 8.2  | iqomp/validator | numeric   | too great                         |
-| 8.3  | iqomp/validator | numeric   | decimal not match                 |
-| 9.0  | iqomp/validator | object    | not an object                     |
-| 10.0 | iqomp/validator | regex     | not match                         |
-| 11.0 | iqomp/validator | required  | required                          |
-| 11.0 | iqomp/validator | req_on    | required                          |
-| 12.0 | iqomp/validator | text      | not a text                        |
-| 12.1 | iqomp/validator | text      | not a slug                        |
-| 12.2 | iqomp/validator | text      | not an alnumdash                  |
-| 12.3 | iqomp/validator | text      | not an alpha                      |
-| 12.4 | iqomp/validator | text      | not an alnum                      |
-| 13.0 | iqomp/validator | url       | not an url                        |
-| 13.1 | iqomp/validator | url       | dont have path                    |
-| 13.2 | iqomp/validator | url       | dont have query                   |
-| 13.3 | iqomp/validator | url       | require query not present         |
-| 21.0 | iqomp/validator | empty     | is empty                          |
-| 21.1 | iqomp/validator | empty     | is not empty                      |
-| 22.0 | iqomp/enum      | enum      | options not found                 |
-| 22.1 | iqomp/enum      | enum      | options not found                 |
-| 22.2 | iqomp/enum      | enum      | options not found                 |
-| 23.1 | iqomp/validator | json      | is not valid json string          |
-| 25.0 | iqomp/validator | -         | is not in acceptable value        |
-| 25.1 | iqomp/validator | -         | is not in acceptable list values  |
-| 25.2 | iqomp/validator | -         | is not match with requested value |
-| 26.1 | iqomp/validator | equals_to | is not equal                      |
-| 28.0 | iqomp/validator | file      | is not file'                      |
+| Code | Module          | Rule        | Info                              |
+| ---- | --------------- | ----------- | --------------------------------- |
+| 1.0  | iqomp/validator | array       | not an array                      |
+| 1.1  | iqomp/validator | array       | not indexed array                 |
+| 1.2  | iqomp/validator | array       | not assoc array                   |
+| 2.0  | iqomp/validator | date        | not a date                        |
+| 2.1  | iqomp/validator | date        | the date too early                |
+| 2.2  | iqomp/validator | date        | the date too far                  |
+| 2.3  | iqomp/validator | date        | wrong date format                 |
+| 3.0  | iqomp/validator | email       | not an email                      |
+| 4.0  | iqomp/validator | in          | not in array                      |
+| 5.0  | iqomp/validator | ip          | not an ip                         |
+| 5.1  | iqomp/validator | ip          | not an ipv4                       |
+| 5.2  | iqomp/validator | ip          | not an ipv6                       |
+| 6.0  | iqomp/validator | length      | too short                         |
+| 6.1  | iqomp/validator | length      | too long                          |
+| 7.0  | iqomp/validator | notin       | in array                          |
+| 8.0  | iqomp/validator | numeric     | not numeric                       |
+| 8.1  | iqomp/validator | numeric     | too less                          |
+| 8.2  | iqomp/validator | numeric     | too great                         |
+| 8.3  | iqomp/validator | numeric     | decimal not match                 |
+| 9.0  | iqomp/validator | object      | not an object                     |
+| 10.0 | iqomp/validator | regex       | not match                         |
+| 11.0 | iqomp/validator | required    | required                          |
+| 11.0 | iqomp/validator | req_on      | required                          |
+| 12.0 | iqomp/validator | text        | not a text                        |
+| 12.1 | iqomp/validator | text        | not a slug                        |
+| 12.2 | iqomp/validator | text        | not an alnumdash                  |
+| 12.3 | iqomp/validator | text        | not an alpha                      |
+| 12.4 | iqomp/validator | text        | not an alnum                      |
+| 13.0 | iqomp/validator | url         | not an url                        |
+| 13.1 | iqomp/validator | url         | dont have path                    |
+| 13.2 | iqomp/validator | url         | dont have query                   |
+| 13.3 | iqomp/validator | url         | require query not present         |
+| 14.0 | iqomp/model     | unique      | not unique                        |
+| 19.0 | iqomp/model     | exists      | not exists on db                  |
+| 20.0 | iqomp/model     | exists-list | one or more not exists on db      |
+| 21.0 | iqomp/validator | empty       | is empty                          |
+| 21.1 | iqomp/validator | empty       | is not empty                      |
+| 22.0 | iqomp/enum      | enum        | options not found                 |
+| 22.1 | iqomp/enum      | enum        | options not found                 |
+| 22.2 | iqomp/enum      | enum        | options not found                 |
+| 23.1 | iqomp/validator | json        | is not valid json string          |
+| 25.0 | iqomp/validator | -           | is not in acceptable value        |
+| 25.1 | iqomp/validator | -           | is not in acceptable list values  |
+| 25.2 | iqomp/validator | -           | is not match with requested value |
+| 26.1 | iqomp/validator | equals_to   | is not equal                      |
+| 28.0 | iqomp/validator | file        | is not file'                      |
