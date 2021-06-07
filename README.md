@@ -789,13 +789,21 @@ to validate is not provided, it will take from request body.
 ```php
 use Iqomp\Validator\Form;
 
-$form   = new Form('form-name');
+$f_params = [
+    'param1' => 'id',
+    'param2' => 1
+];
+
+$form   = new Form('form-name', $f_params);
 $result = $form->validate();
 
 if (!$result) {
     $errors = $form->getErrors();
 }
 ```
+
+The `$f_params` argument is used for replacement of any rules string that start
+with `$.`. Please see below example of usage of the params.
 
 ### Form Configuration
 
@@ -814,6 +822,9 @@ return [
             '/field/' => [
                 'rules' => [
                     // list of rules
+                    'some-rule' => [
+                        '$.param1' => '$.param2'
+                    ]
                 ],
                 'filters' => [
                     // list of filters
