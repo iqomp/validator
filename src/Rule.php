@@ -3,7 +3,7 @@
 /**
  * Validator rules
  * @package iqomp/validator
- * @version 1.0.0
+ * @version 2.1.1
  */
 
 namespace Iqomp\Validator;
@@ -36,7 +36,7 @@ class Rule
 
     protected static function isIndexedArray(array $arr): bool
     {
-        if (!$arr) {
+        if (is_null($arr)) {
             return true;
         }
         return array_keys($arr) === range(0, count($arr) - 1);
@@ -44,7 +44,7 @@ class Rule
 
     public static function array($val, $opts): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -84,7 +84,7 @@ class Rule
 
     public static function date($val, $opts, $obj): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -141,7 +141,7 @@ class Rule
 
     public static function email($val): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -193,7 +193,7 @@ class Rule
 
     public static function in($val, $opts): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -206,7 +206,7 @@ class Rule
 
     public static function ip($val, $opts): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -242,7 +242,7 @@ class Rule
 
     public static function json($val): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -279,7 +279,7 @@ class Rule
 
     public static function notin($val, $opts): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
@@ -289,9 +289,9 @@ class Rule
         return null;
     }
 
-    public static function numeric($val, $opts): ?array
+    public static function numeric($val, $opts, $obj, $fname, $rules): ?array
     {
-        if (!$val) {
+        if (is_null($val)) {
             return null;
         }
 
