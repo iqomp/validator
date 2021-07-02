@@ -6,4 +6,5 @@ return [
     'not an alnum' => 'Bukan data alnum yang valid',
     'not an alnumdash' => 'Bukan data alnumdash yang valid',
     'not an alpha' => 'Bukan data alpha yang valid',
+    'not match with the regex' => 'Tidak cocok dengan bentuk data yang diminta'
 ];

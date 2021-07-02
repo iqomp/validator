@@ -3,7 +3,7 @@
 /**
  * Config provider
  * @package iqomp/validator
- * @version 2.0.0
+ * @version 2.2.0
  */
 
 namespace Iqomp\Validator;
@@ -87,6 +87,7 @@ class ConfigProvider
                     '12.2' => 'not an alnumdash',
                     '12.3' => 'not an alpha',
                     '12.4' => 'not an alnum',
+                    '12.5' => 'not match with the regex',
                     '13.0' => 'not an url',
                     '13.1' => 'dont have path',
                     '13.2' => 'dont have query',
@@ -100,7 +101,8 @@ class ConfigProvider
                     '25.2' => 'is not match with requested value',
 
                     '26.1' => 'is not equal',
-                    '28.0' => 'is not file'
+                    '28.0' => 'is not file',
+                    '29.0' => 'is not boolean'
                 ],
                 'filters' => [
                     'array'     => 'Iqomp\\Validator\\Filter::array',
@@ -116,6 +118,8 @@ class ConfigProvider
                 ],
                 'validators' => [
                     'array'     => 'Iqomp\\Validator\\Rule::array',
+                    'bool'      => 'Iqomp\\Validator\\Rule::bool',
+                    'boolean'   => 'Iqomp\\Validator\\Rule::bool',
                     'callback'  => 'Iqomp\\Validator\\Rule::callback',
                     'date'      => 'Iqomp\\Validator\\Rule::date',
                     'email'     => 'Iqomp\\Validator\\Rule::email',

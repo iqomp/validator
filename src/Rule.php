@@ -3,7 +3,7 @@
 /**
  * Validator rules
  * @package iqomp/validator
- * @version 2.1.1
+ * @version 2.2.0
  */
 
 namespace Iqomp\Validator;
@@ -67,6 +67,18 @@ class Rule
         }
 
         return null;
+    }
+
+    public static function bool($val) {
+        if (is_null($val)) {
+            return null;
+        }
+
+        if (is_bool($val)) {
+            return null;
+        }
+
+        return ['29.0'];
     }
 
     public static function callback($val, $opts, $obj, $fld, $rules): ?array
@@ -423,6 +435,13 @@ class Rule
 
         if ($opts === 'alnum' && !preg_match('!^[a-zA-Z0-9]+$!', $val)) {
             return ['12.4'];
+        }
+
+        // match the regex
+        if (substr($opts, 0, 1) === substr($opts, -1)) {
+            if (!preg_match($opts, $val)) {
+                return ['12.5'];
+            }
         }
 
         return null;

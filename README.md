@@ -115,6 +115,19 @@ an assoc or indexed array:
     // ...
 ```
 
+#### boolean|bool => true
+
+Make sure the value is boolean, it can be `false` or `true`. Other than that is
+failing the validator
+
+```php
+    // ...
+    'rules' => [
+        'boolean' => true
+    ]
+    // ....
+```
+
 #### callback => Class::method
 
 Validate the value with external class. The value of the rule should be class and
@@ -356,12 +369,14 @@ Make sure the value is a text. Optionally follow accepted characters.
 1. `alnumdash` Accept only characters `^[a-zA-Z0-9-]+$`
 1. `alpha` Accept only characters `^[a-zA-Z]+$`
 1. `alnum` Accept only characters `^[a-zA-Z0-9]+$`
+1. `!regex!` Accept only if the value is match with provided regex
 
 ```php
     // ...
     'rules' => [
         'text' => true,
-        // 'text' => 'slug'
+        // 'text' => 'slug',
+        // 'text' => '!^TR-[0-9]+$!'
     ]
     // ...
 ```
@@ -953,6 +968,7 @@ Below is table list of all errors code defined so far:
 | 12.2 | iqomp/validator | text        | not an alnumdash                  |
 | 12.3 | iqomp/validator | text        | not an alpha                      |
 | 12.4 | iqomp/validator | text        | not an alnum                      |
+| 12.5 | iqomp/validator | text        | not match with the regex          |
 | 13.0 | iqomp/validator | url         | not an url                        |
 | 13.1 | iqomp/validator | url         | dont have path                    |
 | 13.2 | iqomp/validator | url         | dont have query                   |
@@ -971,3 +987,4 @@ Below is table list of all errors code defined so far:
 | 25.2 | iqomp/validator | -           | is not match with requested value |
 | 26.1 | iqomp/validator | equals_to   | is not equal                      |
 | 28.0 | iqomp/validator | file        | is not file'                      |
+| 29.0 | iqomp/validator | bool        | is valid boolean type             |
