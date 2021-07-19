@@ -3,7 +3,7 @@
 /**
  * Validator rules
  * @package iqomp/validator
- * @version 2.2.0
+ * @version 2.2.1
  */
 
 namespace Iqomp\Validator;
@@ -419,6 +419,10 @@ class Rule
 
         if (!is_string($val)) {
             return ['12.0'];
+        }
+
+        if ($opts === true) {
+            return null;
         }
 
         if ($opts === 'slug' && !preg_match('!^[a-z0-9-_]+$!', $val)) {
