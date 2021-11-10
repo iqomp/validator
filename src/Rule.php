@@ -3,7 +3,7 @@
 /**
  * Validator rules
  * @package iqomp/validator
- * @version 2.2.1
+ * @version 2.3.2
  */
 
 namespace Iqomp\Validator;
@@ -255,6 +255,10 @@ class Rule
     public static function json($val): ?array
     {
         if (is_null($val)) {
+            return null;
+        }
+
+        if (!is_string($val)) {
             return null;
         }
 
