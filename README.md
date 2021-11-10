@@ -448,6 +448,18 @@ Convert the value to integer
     // ...
 ```
 
+#### json_encode
+
+Encode the object with `json_encode` function
+
+```php
+    // ...
+    'filters' => [
+        'json_encode' => true
+    ]
+    // ...
+```
+
 #### lowercase
 
 Convert the value to lowercase

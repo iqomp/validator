@@ -3,7 +3,7 @@
 /**
  * Predefined filter
  * @package iqomp/validator
- * @version 1.0.0
+ * @version 2.3.0
  */
 
 namespace Iqomp\Validator;
@@ -28,6 +28,11 @@ class Filter
     public static function integer($value)
     {
         return is_null($value) ? $value : (int)$value;
+    }
+
+    public static function json_encode($value)
+    {
+        return is_null($value) ? $value : json_encode($value);
     }
 
     public static function lowercase($value)

@@ -3,7 +3,7 @@
 /**
  * Config provider
  * @package iqomp/validator
- * @version 2.2.0
+ * @version 2.3.0
  */
 
 namespace Iqomp\Validator;
@@ -105,16 +105,17 @@ class ConfigProvider
                     '29.0' => 'is not boolean'
                 ],
                 'filters' => [
-                    'array'     => 'Iqomp\\Validator\\Filter::array',
-                    'boolean'   => 'Iqomp\\Validator\\Filter::boolean',
-                    'float'     => 'Iqomp\\Validator\\Filter::float',
-                    'integer'   => 'Iqomp\\Validator\\Filter::integer',
-                    'lowercase' => 'Iqomp\\Validator\\Filter::lowercase',
-                    'object'    => 'Iqomp\\Validator\\Filter::object',
-                    'round'     => 'Iqomp\\Validator\\Filter::round',
-                    'string'    => 'Iqomp\\Validator\\Filter::string',
-                    'ucwords'   => 'Iqomp\\Validator\\Filter::ucwords',
-                    'uppercase' => 'Iqomp\\Validator\\Filter::uppercase'
+                    'array'       => 'Iqomp\\Validator\\Filter::array',
+                    'boolean'     => 'Iqomp\\Validator\\Filter::boolean',
+                    'float'       => 'Iqomp\\Validator\\Filter::float',
+                    'integer'     => 'Iqomp\\Validator\\Filter::integer',
+                    'json_encode' => 'Iqomp\\Validator\\Filter::jsonEncode',
+                    'lowercase'   => 'Iqomp\\Validator\\Filter::lowercase',
+                    'object'      => 'Iqomp\\Validator\\Filter::object',
+                    'round'       => 'Iqomp\\Validator\\Filter::round',
+                    'string'      => 'Iqomp\\Validator\\Filter::string',
+                    'ucwords'     => 'Iqomp\\Validator\\Filter::ucwords',
+                    'uppercase'   => 'Iqomp\\Validator\\Filter::uppercase'
                 ],
                 'validators' => [
                     'array'     => 'Iqomp\\Validator\\Rule::array',
