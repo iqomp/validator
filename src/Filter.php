@@ -3,7 +3,7 @@
 /**
  * Predefined filter
  * @package iqomp/validator
- * @version 2.3.0
+ * @version 2.3.1
  */
 
 namespace Iqomp\Validator;
@@ -30,7 +30,7 @@ class Filter
         return is_null($value) ? $value : (int)$value;
     }
 
-    public static function json_encode($value)
+    public static function jsonEncode($value)
     {
         return is_null($value) ? $value : json_encode($value);
     }
