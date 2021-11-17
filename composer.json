@@ -3,7 +3,7 @@
     "description": "Simple and easy form/object validator",
     "type": "library",
     "license": "MIT",
-    "version": "2.3.2",
+    "version": "2.3.3",
     "authors": [
         {
             "name": "Iqbal Fauzi",
